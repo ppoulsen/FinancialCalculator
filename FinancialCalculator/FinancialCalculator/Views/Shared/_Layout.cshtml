@@ -6,13 +6,17 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/metro")
-    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/metro")
 </head>
-<body>
-    @RenderBody()
-
-    @RenderSection("scripts", required: false)
+<body class="metro">
+    @Html.Partial("_NavBar")
+    <div class="grid fluid">
+        <div class="row">
+            <div class="span10 offset1">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
 </body>
 </html>
