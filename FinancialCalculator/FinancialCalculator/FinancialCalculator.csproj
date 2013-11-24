@@ -130,12 +130,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\metro-ui-css\metro-bootstrap-responsive.css" />
+    <Content Include="Content\metro-ui-css\metro-bootstrap.css" />
+    <Content Include="Content\metro-ui-fonts\iconFont.dev.svg" />
+    <Content Include="Content\metro-ui-fonts\iconFont.svg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -192,6 +197,10 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\metro-ui-fonts\iconFont.eot" />
+    <Content Include="Content\metro-ui-fonts\iconFont.json" />
+    <Content Include="Content\metro-ui-fonts\iconFont.ttf" />
+    <Content Include="Content\metro-ui-fonts\iconFont.woff" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -206,6 +215,34 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\metro-ui-js\metro-accordion.js" />
+    <Content Include="Scripts\metro-ui-js\metro-button-set.js" />
+    <Content Include="Scripts\metro-ui-js\metro-calendar.js" />
+    <Content Include="Scripts\metro-ui-js\metro-carousel.js" />
+    <Content Include="Scripts\metro-ui-js\metro-core.js" />
+    <Content Include="Scripts\metro-ui-js\metro-countdown.js" />
+    <Content Include="Scripts\metro-ui-js\metro-date-format.js" />
+    <Content Include="Scripts\metro-ui-js\metro-datepicker.js" />
+    <Content Include="Scripts\metro-ui-js\metro-dialog.js" />
+    <Content Include="Scripts\metro-ui-js\metro-drag-tile.js" />
+    <Content Include="Scripts\metro-ui-js\metro-dropdown.js" />
+    <Content Include="Scripts\metro-ui-js\metro-fluentmenu.js" />
+    <Content Include="Scripts\metro-ui-js\metro-hint.js" />
+    <Content Include="Scripts\metro-ui-js\metro-input-control.js" />
+    <Content Include="Scripts\metro-ui-js\metro-listview.js" />
+    <Content Include="Scripts\metro-ui-js\metro-live-tile.js" />
+    <Content Include="Scripts\metro-ui-js\metro-loader.js" />
+    <Content Include="Scripts\metro-ui-js\metro-notify.js" />
+    <Content Include="Scripts\metro-ui-js\metro-plugin-template.js" />
+    <Content Include="Scripts\metro-ui-js\metro-progressbar.js" />
+    <Content Include="Scripts\metro-ui-js\metro-rating.js" />
+    <Content Include="Scripts\metro-ui-js\metro-slider.js" />
+    <Content Include="Scripts\metro-ui-js\metro-stepper.js" />
+    <Content Include="Scripts\metro-ui-js\metro-tab-control.js" />
+    <Content Include="Scripts\metro-ui-js\metro-table.js" />
+    <Content Include="Scripts\metro-ui-js\metro-times.js" />
+    <Content Include="Scripts\metro-ui-js\metro-touch-handler.js" />
+    <Content Include="Scripts\metro-ui-js\metro-treeview.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -219,10 +256,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +293,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>xcopy $(SolutionDir)packages\Metro.UI.CSS.2.0.1\css $(ProjectDir)Content\metro-ui-css /i /q /r /s /y
+xcopy $(SolutionDir)packages\Metro.UI.CSS.2.0.1\fonts $(ProjectDir)Content\metro-ui-fonts /i /q /r /s /y
+xcopy $(SolutionDir)packages\Metro.UI.CSS.2.0.1\js\metro $(ProjectDir)Scripts\metro-ui-js /i /q /r /s /y</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
