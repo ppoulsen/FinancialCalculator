@@ -2,6 +2,36 @@
     ViewBag.Title = "Generalized Present Value Calculation";
 }
 
+<script type="text/javascript" src="~/Scripts/site/forms.js"></script>
+<script type="text/javascript">
+    var cf_index = 1;
+
+    $(function () {
+        $('#P,#y').on('input', disableOther);
+        $('#M,#m,#N').on('input', disableNOrMAndm);
+        $('#repeat').change(function () {
+            if ($(this).is(':checked'))
+                $('#repeatCount').removeAttr('disabled');
+            else {
+                $('#repeatCount').val('');
+                $('#repeatCount').attr('disabled', 'disabled');
+            }
+        });
+        $('#addCf').click(function () {
+            cf_index++;
+            var newId = "CF_" + cf_index;
+            $('.current-cf-row').append(
+                '<div class="input-control text span2"><input id="CF_'
+                + cf_index + '" class="CF" type="text" /></div>');
+            if (!(cf_index % 6)) {
+                $('.current-cf-row').removeClass('current-cf-row')
+                    .after('<div class="row current-cf-row"></div>');
+            }
+
+        });
+    });
+</script>
+
 <div class="row">
     <div class="span12">
         <h1>@(ViewBag.Title)</h1>
@@ -17,7 +47,7 @@
         <div class="row">
             <div class="input-control text span12">
                 <label>CF<sub>0</sub></label>
-                <input id="CF0" class="CF" type="text" />
+                <input id="CF_0" class="CF" type="text" />
             </div>
         </div>
         <div class="row">
@@ -26,25 +56,25 @@
                 <h2>Enter CF's for each Period (or repeat)</h2>
             </div>
         </div>
-        <div class="row">
+        <div class="row current-cf-row">
             <div class="input-control text span2">
-                <input id="CF1" class="CF" type="text" />
+                <input id="CF_1" class="CF" type="text" />
             </div>
         </div>
         <div class="row">
             <div class="span4">
-                <button class="large success">Add CF</button>
+                <button id="addCf" class="large success">Add CF</button>
             </div>
             <div class="input-control checkbox span4">
                 <label>
-                    <input type="checkbox" />
+                    <input id="repeat" type="checkbox" />
                     <span class="check"></span>
                     Repeat Last CF?
                 </label>
             </div>
             <div class="input-control text span4">
                 <label>Repeat for how long?</label>
-                <input id="repeat" type="text" disabled />
+                <input id="repeatCount" type="text" disabled="disabled" />
             </div>
         </div>
         <div class="row">

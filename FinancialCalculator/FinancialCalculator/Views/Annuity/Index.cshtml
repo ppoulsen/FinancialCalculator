@@ -2,6 +2,14 @@
     ViewBag.Title = "Annuity & Amortizing Mortgage";
 }
 
+<script type="text/javascript" src="~/Scripts/site/forms.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#P,#C,#y').on('input', disableThird);
+        $('#M,#m,#N').on('input', disableNOrMAndm);
+    });
+</script>
+
 <div class="row">
     <div class="span12">
         <h1>@(ViewBag.Title)</h1>

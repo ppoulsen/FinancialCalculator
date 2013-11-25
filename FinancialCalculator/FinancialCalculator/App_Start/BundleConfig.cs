@@ -28,8 +28,8 @@ namespace FinancialCalculator
                         "~/Scripts/jquery/*.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/metro").Include(
-                        "~/Scripts/metro-ui-js/metro-core.js",
-                        "~/Scripts/metro-ui-js/*.js"));
+                        "~/Scripts/metro/metro-core.js",
+                        "~/Scripts/metro/*.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
