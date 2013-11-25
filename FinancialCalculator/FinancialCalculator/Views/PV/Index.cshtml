@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Generalized Present Value Calculation";
+}
+
+<div class="row">
+    <div class="span12">
+        <h1>@(ViewBag.Title)</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <div class="row">
+            <div class="span12">
+                <h2>Enter CF<sub>0</sub> (or leave blank)</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-control text span12">
+                <label>CF<sub>0</sub></label>
+                <input id="CF0" class="CF" type="text" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <hr />
+                <h2>Enter CF's for each Period (or repeat)</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-control text span2">
+                <input id="CF1" class="CF" type="text" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="span4">
+                <button class="large success">Add CF</button>
+            </div>
+            <div class="input-control checkbox span4">
+                <label>
+                    <input type="checkbox" />
+                    <span class="check"></span>
+                    Repeat Last CF?
+                </label>
+            </div>
+            <div class="input-control text span4">
+                <label>Repeat for how long?</label>
+                <input id="repeat" type="text" disabled />
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <hr />
+                <h2>Input P or y</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-control text span6">
+                <label>P</label>
+                <input id="P" type="text" />
+            </div>
+            <div class="input-control text span6">
+                <label>y</label>
+                <input id="y" type="text" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <hr />
+                <h2>Enter m and M</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-control text span6">
+                <label>M</label>
+                <input id="M" type="text" />
+            </div>
+            <div class="input-control text span6">
+                <label>m</label>
+                <input id="m" type="text" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <hr />
+                <h2>OR</h2>
+                <hr />
+                <h2>Enter N</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-control text span12">
+                <label>N</label>
+                <input id="N" type="text" />
+            </div>
+        </div>
+        <div class="row"></div>
+        <div class="row">
+            <div class="span12">
+                <button id="submit-pv" class="large primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
