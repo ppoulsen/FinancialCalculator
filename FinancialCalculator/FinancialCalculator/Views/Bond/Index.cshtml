@@ -4,31 +4,109 @@
 
 <script type="text/javascript" src="~/Scripts/site/forms.js"></script>
 <script type="text/javascript">
+    function validateFields() {
+        FIsGood = $.isNumeric($('#F').val());
+        PCyGood = checkPCy();
+        NMmGood = checkNMm();
+        if (!FIsGood) {
+            $.Notify({
+                caption: 'Error',
+                content: 'Must enter a number for F.',
+            });
+        }
+        if (!PCyGood) {
+            $.Notify({
+                caption: 'Error',
+                content: 'Input 2 of 3: P, C, y with numbers.',
+            });
+        }
+        if (!NMmGood) {
+            $.Notify({
+                caption: 'Error',
+                content: 'Input (M and m) or (N) with numbers.',
+            });
+        }
+
+        return (FIsGood && PCyGood && NMmGood);
+    }
+
+    function getFunctionName(useP, useC, usey, useMm) {
+        ret = '/Bond/BondWith';
+        if (useP && useC)
+            ret += "PandC";
+        else if (useP && usey)
+            ret += "Pandy";
+        else
+            ret += "Candy"; // heh
+
+        if (useMm)
+            ret += "andMm";
+        else
+            ret += "andN";
+        
+        return ret;
+    }
+
+    function submitBond() {
+        var F;
+        var P, C, y;
+        var M, m, N;
+
+        var useP = true;
+        if ($('#P').attr('disabled'))
+            useP = false;
+        var useC = true;
+        if ($('#C').attr('disabled'))
+            useC = false;
+        var usey = true;
+        if ($('#y').attr('disabled'))
+            usey = false;
+
+        // Mm or N?
+        var useMm = true;
+        if ($('#M').attr('disabled'))
+            useMm = false;
+
+        F = parseField($('#F').val());
+        if (useP)
+            P = parseField($('#P').val());
+        if (useC)
+            C = parseField($('#C').val());
+        if (usey)
+            y = parseField($('#y').val());
+        if (useMm) {
+            M = parseField($('#M').val());
+            m = parseField($('#m').val());
+        } else
+            N = parseField($('#N').val());
+
+
+        var func = getFunctionName(useP, useC, usey, useMm);
+
+        var params = new Object();
+        params.F = F;
+        if (useP)
+            params.P = P;
+        if (useC)
+            params.C = C;
+        if (usey)
+            params.y = y;
+        if (useMm) {
+            params.M = M;
+            params.m = m;
+        } else
+            params.N = N;
+        var serialized = $.param(params, true);
+        var url = func + "?" + serialized;
+        window.location.href = url;
+    }
+
     $(function () {
         $('#P,#C,#y').on('input', disableThird);
         $('#M,#m,#N').on('input', disableNOrMAndm);
         $('#submit-bond').click(function () {
-            FIsGood = $.isNumeric($('#F').val());
-            PCyGood = checkPCy();
-            NMmGood = checkNMm();
-            if (!FIsGood) {
-                $.Notify({
-                    caption: 'Error',
-                    content: 'Must enter a number for F.',
-                });
-            }
-            if (!PCyGood) {
-                $.Notify({
-                    caption: 'Error',
-                    content: 'Input 2 of 3: P, C, y with numbers.',
-                });
-            }
-            if (!NMmGood) {
-                $.Notify({
-                    caption: 'Error',
-                    content: 'Input (M and m) or (N) with numbers.',
-                });
-            }
+            if (validateFields())
+                submitBond();
         });
     });
 </script>
