@@ -3,18 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using FinancialCalculator.Functions.Utilities;
+
 namespace FinancialCalculator.Functions
 {
     public static class Annuity
     {
+        public static double FindYieldMm(double y, IEnumerable<Object> otherParams)
+        {
+            double P = (double) otherParams.ElementAt(0);
+            double C = (double) otherParams.ElementAt(1);
+            long M = (long) otherParams.ElementAt(2);
+            long littleM = (long) otherParams.ElementAt(3);
+            return AnnuityWithCandyandMm(C, y, M, littleM) - P;
+        }
+
+        public static double FindYieldN(double y, IEnumerable<Object> otherParams)
+        {
+            double P = (double) otherParams.ElementAt(0);
+            double C = (double) otherParams.ElementAt(1);
+            long N = (long) otherParams.ElementAt(2);
+            return AnnuityWithCandyandN(C, y, N) - P;
+        }
+
         public static double AnnuityWithPandCandMm(double P, double C, long M, long littleM)
         {
-            return 0.0;
+            IEnumerable<Object> otherParams = new object[]
+                {
+                    P, C, M, littleM
+                };
+            var func = new CommonMethods.MyYieldFunction(FindYieldMm);
+            return CommonMethods.UseBisectionMethod(func, 1E-10, 100.0, otherParams);
         }
 
         public static double AnnuityWithPandCandN(double P, double C, long N)
         {
-            return 0.0;
+            IEnumerable<Object> otherParams = new object[]
+                {
+                    P, C, N
+                };
+            var func = new CommonMethods.MyYieldFunction(FindYieldN);
+            return CommonMethods.UseBisectionMethod(func, 1E-10, 100.0, otherParams);
         }
 
         public static double AnnuityWithPandyandMm(double P, double y, long M, long littleM)

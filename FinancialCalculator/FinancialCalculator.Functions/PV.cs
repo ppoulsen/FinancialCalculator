@@ -9,12 +9,18 @@ namespace FinancialCalculator.Functions
     {
         public static double PvWithPAndMm(IEnumerable<double> cashFlows, double P, long M, long littleM, bool repeat, long repeatCount)
         {
-            return 0.0;
+            double fv = cashFlows.ElementAt(1);
+            double ratio = fv / P;
+            double rate = Math.Pow(ratio, 1 / M) - 1;
+            return rate * littleM;
         }
 
         public static double PvWithPandN(IEnumerable<double> cashFlows, double P, long N, bool repeat, long repeatCount)
         {
-            return 0.0;
+            double fv = cashFlows.ElementAt(1);
+            double ratio = fv / P;
+            double rate = Math.Pow(ratio, 1 / N) - 1;
+            return rate;
         }
 
         public static double PvWithyAndMm(IEnumerable<double> cashFlows, double y, long M, long littleM, bool repeat, long repeatCount)
