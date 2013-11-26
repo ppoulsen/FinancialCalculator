@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5C7DD0
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialCalculator.Functions", "FinancialCalculator.Functions\FinancialCalculator.Functions.csproj", "{F99073A2-DFF2-47A6-BDD6-4A3D746E1BCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{70C5B2FA-5988-444D-ABF6-1ACC66DD2A49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70C5B2FA-5988-444D-ABF6-1ACC66DD2A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70C5B2FA-5988-444D-ABF6-1ACC66DD2A49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F99073A2-DFF2-47A6-BDD6-4A3D746E1BCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F99073A2-DFF2-47A6-BDD6-4A3D746E1BCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F99073A2-DFF2-47A6-BDD6-4A3D746E1BCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F99073A2-DFF2-47A6-BDD6-4A3D746E1BCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

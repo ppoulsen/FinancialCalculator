@@ -134,9 +134,11 @@
     <Compile Include="Controllers\BondController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PVController.cs" />
+    <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ResultsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -194,7 +196,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Scripts\jquery\" />
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +209,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\PV\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FinancialCalculator.Functions\FinancialCalculator.Functions.csproj">
+      <Project>{f99073a2-dff2-47a6-bdd6-4a3d746e1bce}</Project>
+      <Name>FinancialCalculator.Functions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Results\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
