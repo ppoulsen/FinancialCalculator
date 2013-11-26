@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    @RenderBody()
-
+    @Styles.Render("~/Content/css/metro-ui-css")
     @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/metro")
+</head>
+<body class="metro">
+    @Html.Partial("_NavBar")
+    <div class="grid fluid">
+        <div class="row">
+            <div class="span10 offset1">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
 </body>
 </html>

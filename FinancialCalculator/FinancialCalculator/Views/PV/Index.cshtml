@@ -1,0 +1,245 @@
+﻿@{
+    ViewBag.Title = "Generalized Present Value Calculation";
+}
+
+<script type="text/javascript" src="~/Scripts/site/forms.js"></script>
+<script type="text/javascript">
+    var cf_index = 1;
+
+    function validateFields() {
+        CF0IsGood = $.isNumeric($('#CF_0').val()) || !($('#CF_0').val());
+        CFsAreGood = true;
+        $('.CF').each(function (index) {
+            CFsAreGood = CFsAreGood && ($.isNumeric($(this).val()) || !($(this).val()))
+        });
+        PyGood = checkPy();
+        NMmGood = checkNMm();
+        if (!CF0IsGood) {
+            $.Notify({
+                caption: 'Error',
+                content: 'Must input number for CF<sub>0</sub> or leave blank.',
+            });
+        }
+        if (!CFsAreGood) {
+            $.Notify({
+                caption: 'Error',
+                content: 'Must input numbers for all Cash Flows or leave blank for 0.',
+            });
+        }
+        if (!PyGood) {
+            $.Notify({
+                caption: 'Error',
+                content: 'Must input a number for P or y',
+            });
+        }
+        if (!NMmGood) {
+            $.Notify({
+                caption: 'Error',
+                content: 'Input (M and m) or (N) with numbers.',
+            });
+        }
+        return (CF0IsGood && CFsAreGood && PyGood && NMmGood)
+    }
+
+    function getFunctionName(useP, useMm) {
+        if (useP && useMm)
+            return "/PV/PvWithPAndMm";
+        else if (useP)
+            return "/PV/PvWithPAndN";
+        else if (useMm)
+            return "/PV/PvWithyAndMm";
+        else
+            return "/PV/PvWithyandN";
+    }
+
+    function submitPv() {
+        var cashFlows = new Array();
+        var P, y;
+        var m, M, N;
+        var repeat, repeatCount;
+
+        // Grab our cash flows
+        $('.CF').each(function () {
+            var id = $(this).attr('id');
+            // CF_###
+            var num = parseInt(id.split('_')[1]);
+            cashFlows[num] = parseField($(this).val());
+        });
+
+        // P or y?
+        var useP = true;
+        if ($('#P').attr('disabled'))
+            useP = false;
+
+        // Mm or N?
+        var useMm = true;
+        if ($('#M').attr('disabled'))
+            useMm = false;
+
+        // Get P or y
+        if (useP)
+            P = parseField($('#P').val());
+        else
+            y = parseField($('#y').val());
+
+        if (useMm) {
+            M = parseField($('#M').val());
+            m = parseField($('#m').val());
+        } else
+            N = parseField($('#N').val());
+
+        repeat = $('#repeat').is(':checked');
+        if (repeat)
+            repeatCount = parseField($('#repeatCount').val());
+        else
+            repeatCount = 0;
+        
+        var func = getFunctionName(useP, useMm, repeat, repeatCount);
+
+        var params = new Object();
+        params.cashFlows = cashFlows;
+        if (useP)
+            params.P = P;
+        else
+            params.y = y;
+        if (useMm) {
+            params.M = M;
+            params.littleM = m;
+        } else
+            params.N = N;
+        params.repeat = repeat;
+        params.repeatCount = repeatCount;
+        var serialized = $.param(params, true);
+        var url = func + '?' + serialized;
+        window.location.href = url;
+    }
+
+    $(function () {
+        $('#P,#y').on('input', disableOther);
+        $('#M,#m,#N').on('input', disableNOrMAndm);
+        $('#repeat').change(function () {
+            if ($(this).is(':checked'))
+                $('#repeatCount').removeAttr('disabled');
+            else {
+                $('#repeatCount').val('');
+                $('#repeatCount').attr('disabled', 'disabled');
+            }
+        });
+        $('#addCf').click(function () {
+            cf_index++;
+            var newId = "CF_" + cf_index;
+            $('.current-cf-row').append(
+                '<div class="input-control text span2"><input id="CF_'
+                + cf_index + '" class="CF" type="text" /></div>');
+            if (!(cf_index % 6)) {
+                $('.current-cf-row').removeClass('current-cf-row')
+                    .after('<div class="row current-cf-row"></div>');
+            }
+
+        });
+        $('#submit-pv').click(function () {
+            if (validateFields())
+                submitPv();
+        });
+    });
+</script>
+
+<div class="row">
+    <div class="span12">
+        <h1>@(ViewBag.Title)</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <div class="row">
+            <div class="span12">
+                <h2>Enter CF<sub>0</sub> (or leave blank)</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-control text span12">
+                <label>CF<sub>0</sub></label>
+                <input id="CF_0" class="CF" type="text" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <hr />
+                <h2>Enter CF's for each Period (or repeat)</h2>
+            </div>
+        </div>
+        <div class="row current-cf-row">
+            <div class="input-control text span2">
+                <input id="CF_1" class="CF" type="text" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="span4">
+                <button id="addCf" class="large success">Add CF</button>
+            </div>
+            <div class="input-control checkbox span4">
+                <label>
+                    <input id="repeat" type="checkbox" />
+                    <span class="check"></span>
+                    Repeat Last CF?
+                </label>
+            </div>
+            <div class="input-control text span4">
+                <label>Repeat for how long?</label>
+                <input id="repeatCount" type="text" disabled="disabled" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <hr />
+                <h2>Input P or y</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-control text span6">
+                <label>P</label>
+                <input id="P" type="text" />
+            </div>
+            <div class="input-control text span6">
+                <label>y</label>
+                <input id="y" type="text" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <hr />
+                <h2>Enter m and M</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-control text span6">
+                <label>M</label>
+                <input id="M" type="text" />
+            </div>
+            <div class="input-control text span6">
+                <label>m</label>
+                <input id="m" type="text" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <hr />
+                <h2>OR</h2>
+                <hr />
+                <h2>Enter N</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-control text span12">
+                <label>N</label>
+                <input id="N" type="text" />
+            </div>
+        </div>
+        <div class="row"></div>
+        <div class="row">
+            <div class="span12">
+                <button id="submit-pv" class="large primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

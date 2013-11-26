@@ -1,0 +1,46 @@
+﻿@model FinancialCalculator.Models.ResultsViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="row">
+    <div class="span12">
+        <h1>@(ViewBag.Title)</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <div class="row">
+            <div class="span10 offset1">
+                <h2>Parameters</h2>
+                <table class="table striped">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var param in Model.Parameters)
+                        {
+                            <tr>
+                                <td>@(param.Key)</td>
+                                <td>@(param.Value.ToString())</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="span10 offset1">
+                <hr />
+                <h2>Result</h2>
+                <h3>@(Model.ResultKey) = @(Model.ResultValue.ToString())</h3>
+            </div>
+        </div>
+    </div>
+</div>
