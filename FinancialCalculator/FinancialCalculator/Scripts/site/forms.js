@@ -44,6 +44,46 @@ function disableOther() {
     }
 }
 
+function checkPCy() {
+    var P = $('#P').val();
+    var C = $('#C').val();
+    var y = $('#y').val();
+    var PIsGood = $.isNumeric(P);
+    var CIsGood = $.isNumeric(C);
+    var yIsGood = $.isNumeric(y);
+    if (
+        (PIsGood && CIsGood) ||
+        (PIsGood && yIsGood) ||
+        (CIsGood && yIsGood))
+        return true;
+    else
+        return false;
+}
+
+function checkPy() {
+    var P = $('#P').val();
+    var y = $('#y').val();
+    var PIsGood = $.isNumeric(P);
+    var yIsGood = $.isNumeric(y);
+    if (PIsGood || yIsGood)
+        return true;
+    else
+        return false;
+}
+
+function checkNMm() {
+    var N = $('#N').val();
+    var M = $('#M').val();
+    var m = $('#m').val();
+    var NIsGood = $.isNumeric(N);
+    var MIsGood = $.isNumeric(M);
+    var mIsGood = $.isNumeric(m);
+    if ((NIsGood) || (MIsGood && mIsGood))
+        return true;
+    else
+        return false;
+}
+
 // mM or N
 function disableNOrMAndm() {
     var m = $('#m').val();

@@ -29,6 +29,39 @@
             }
 
         });
+        $('#submit-pv').click(function () {
+            CF0IsGood = $.isNumeric($('#CF_0').val()) || !($('#CF_0').val());
+            CFsAreGood = true;
+            $('.CF').each(function (index) {
+                CFsAreGood = CFsAreGood && ($.isNumeric($(this).val()) || !($(this).val()))
+            });
+            PyGood = checkPy();
+            NMmGood = checkNMm();
+            if (!CF0IsGood) {
+                $.Notify({
+                    caption: 'Error',
+                    content: 'Must input number for CF<sub>0</sub> or leave blank.',
+                });
+            }
+            if (!CFsAreGood) {
+                $.Notify({
+                    caption: 'Error',
+                    content: 'Must input numbers for all Cash Flows or leave blank for 0.',
+                });
+            }
+            if (!PyGood) {
+                $.Notify({
+                    caption: 'Error',
+                    content: 'Must input a number for P or y',
+                });
+            }
+            if (!NMmGood) {
+                $.Notify({
+                    caption: 'Error',
+                    content: 'Input (M and m) or (N) with numbers.',
+                });
+            }
+        });
     });
 </script>
 

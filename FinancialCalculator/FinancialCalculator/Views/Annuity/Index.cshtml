@@ -7,6 +7,22 @@
     $(function () {
         $('#P,#C,#y').on('input', disableThird);
         $('#M,#m,#N').on('input', disableNOrMAndm);
+        $('#submit-annuity').click(function () {
+            PCyGood = checkPCy();
+            NMmGood = checkNMm();
+            if (!PCyGood) {
+                $.Notify({
+                    caption: 'Error',
+                    content: 'Input 2 of 3: P, C, y with numbers.',
+                });
+            }
+            if (!NMmGood) {
+                $.Notify({
+                    caption: 'Error',
+                    content: 'Input (M and m) or (N) with numbers.',
+                });
+            }
+        });
     });
 </script>
 

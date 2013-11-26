@@ -7,6 +7,29 @@
     $(function () {
         $('#P,#C,#y').on('input', disableThird);
         $('#M,#m,#N').on('input', disableNOrMAndm);
+        $('#submit-bond').click(function () {
+            FIsGood = $.isNumeric($('#F').val());
+            PCyGood = checkPCy();
+            NMmGood = checkNMm();
+            if (!FIsGood) {
+                $.Notify({
+                    caption: 'Error',
+                    content: 'Must enter a number for F.',
+                });
+            }
+            if (!PCyGood) {
+                $.Notify({
+                    caption: 'Error',
+                    content: 'Input 2 of 3: P, C, y with numbers.',
+                });
+            }
+            if (!NMmGood) {
+                $.Notify({
+                    caption: 'Error',
+                    content: 'Input (M and m) or (N) with numbers.',
+                });
+            }
+        });
     });
 </script>
 
