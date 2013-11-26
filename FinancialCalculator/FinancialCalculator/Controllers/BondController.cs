@@ -22,7 +22,7 @@ namespace FinancialCalculator.Controllers
         [HttpGet]
         public ActionResult BondWithPandCandMm(double F, double P, double C, long M, long littleM)
         {
-            double y = Bond.BondWithPandCandMm(P, C, M, littleM);
+            double y = Bond.BondWithPandCandMm(F, P, C, M, littleM);
             ResultsViewModel model = new ResultsViewModel()
             {
                 Title = "Results for Bond with F, P, and C for periods M/m",
@@ -43,7 +43,7 @@ namespace FinancialCalculator.Controllers
         [HttpGet]
         public ActionResult BondWithPandCandN(double F, double P, double C, long N)
         {
-            double y = Bond.BondWithPandCandN(P, C, N);
+            double y = Bond.BondWithPandCandN(F, P, C, N);
             ResultsViewModel model = new ResultsViewModel()
             {
                 Title = "Results for Bond with F, P, and C for N periods",
@@ -63,7 +63,7 @@ namespace FinancialCalculator.Controllers
         [HttpGet]
         public ActionResult BondWithPandyandMm(double F, double P, double y, long M, long littleM)
         {
-            double C = Bond.BondWithPandyandMm(P, y, M, littleM);
+            double C = Bond.BondWithPandyandMm(F, P, y, M, littleM);
             ResultsViewModel model = new ResultsViewModel()
             {
                 Title = "Results for Bond with F, P, and y for periods M/m",
@@ -84,7 +84,7 @@ namespace FinancialCalculator.Controllers
         [HttpGet]
         public ActionResult BondWithPandyandN(double F, double P, double y, long N)
         {
-            double C = Bond.BondWithPandyandN(P, y, N);
+            double C = Bond.BondWithPandyandN(F, P, y, N);
             ResultsViewModel model = new ResultsViewModel()
             {
                 Title = "Results for Bond with F, P, and y for N periods",
@@ -104,7 +104,7 @@ namespace FinancialCalculator.Controllers
         [HttpGet]
         public ActionResult BondWithCandyandMm(double F, double C, double y, long M, long littleM)
         {
-            double P = Bond.BondWithCandyandMm(C, y, M, littleM);
+            double P = Bond.BondWithCandyandMm(F, C, y, M, littleM);
             ResultsViewModel model = new ResultsViewModel()
             {
                 Title = "Results for Bond with F, C, and y for periods M/m",
@@ -125,7 +125,7 @@ namespace FinancialCalculator.Controllers
         [HttpGet]
         public ActionResult BondWithCandyandN(double F, double C, double y, long N)
         {
-            double P = Bond.BondWithCandyandN(C, y, N);
+            double P = Bond.BondWithCandyandN(F, C, y, N);
             ResultsViewModel model = new ResultsViewModel()
             {
                 Title = "Results for Bond with F, C, and y for N periods",
