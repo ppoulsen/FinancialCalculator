@@ -6,6 +6,114 @@
 <script type="text/javascript">
     var cf_index = 1;
 
+    function validateFields() {
+        CF0IsGood = $.isNumeric($('#CF_0').val()) || !($('#CF_0').val());
+        CFsAreGood = true;
+        $('.CF').each(function (index) {
+            CFsAreGood = CFsAreGood && ($.isNumeric($(this).val()) || !($(this).val()))
+        });
+        PyGood = checkPy();
+        NMmGood = checkNMm();
+        if (!CF0IsGood) {
+            $.Notify({
+                caption: 'Error',
+                content: 'Must input number for CF<sub>0</sub> or leave blank.',
+            });
+        }
+        if (!CFsAreGood) {
+            $.Notify({
+                caption: 'Error',
+                content: 'Must input numbers for all Cash Flows or leave blank for 0.',
+            });
+        }
+        if (!PyGood) {
+            $.Notify({
+                caption: 'Error',
+                content: 'Must input a number for P or y',
+            });
+        }
+        if (!NMmGood) {
+            $.Notify({
+                caption: 'Error',
+                content: 'Input (M and m) or (N) with numbers.',
+            });
+        }
+        return (CF0IsGood && CFsAreGood && PyGood && NMmGood)
+    }
+
+    function getFunctionName(useP, useMm) {
+        if (useP && useMm)
+            return "/PV/PvWithPAndMm";
+        else if (useP)
+            return "/PV/PvWithPAndN";
+        else if (useMm)
+            return "/PV/PvWithyAndMm";
+        else
+            return "/PV/PvWithyandN";
+    }
+
+    function submitPv() {
+        var cashFlows = new Array();
+        var P, y;
+        var m, M, N;
+        var repeat, repeatCount;
+
+        // Grab our cash flows
+        $('.CF').each(function () {
+            var id = $(this).attr('id');
+            // CF_###
+            var num = parseInt(id.split('_')[1]);
+            cashFlows[num] = parseField($(this).val());
+        });
+
+        // P or y?
+        var useP = true;
+        if ($('#P').attr('disabled'))
+            useP = false;
+
+        // Mm or N?
+        var useMm = true;
+        if ($('#M').attr('disabled'))
+            useMm = false;
+
+        // Get P or y
+        if (useP)
+            P = parseField($('#P').val());
+        else
+            y = parseField($('#y').val());
+
+        if (useMm) {
+            M = parseField($('#M').val());
+            m = parseField($('#m').val());
+        } else
+            N = parseField($('#N').val());
+
+        repeat = $('#repeat').is(':checked');
+        if (repeat)
+            repeatCount = parseField($('#repeatCount').val());
+        else
+            repeatCount = 0;
+        
+        var func = getFunctionName(useP, useMm, repeat, repeatCount);
+
+        var params = new Object();
+        params.cashFlows = cashFlows;
+        if (useP)
+            params.P = P;
+        else
+            params.y = y;
+        if (useMm) {
+            params.M = M;
+            params.m = m;
+        } else
+            params.N = N;
+        params.repeat = repeat;
+        params.repeatCount = repeatCount;
+        var serialized = $.param(params, true);
+        var url = func + '?' + serialized;
+        window.location.href = url;
+    }
+
     $(function () {
         $('#P,#y').on('input', disableOther);
         $('#M,#m,#N').on('input', disableNOrMAndm);
@@ -30,37 +138,8 @@
 
         });
         $('#submit-pv').click(function () {
-            CF0IsGood = $.isNumeric($('#CF_0').val()) || !($('#CF_0').val());
-            CFsAreGood = true;
-            $('.CF').each(function (index) {
-                CFsAreGood = CFsAreGood && ($.isNumeric($(this).val()) || !($(this).val()))
-            });
-            PyGood = checkPy();
-            NMmGood = checkNMm();
-            if (!CF0IsGood) {
-                $.Notify({
-                    caption: 'Error',
-                    content: 'Must input number for CF<sub>0</sub> or leave blank.',
-                });
-            }
-            if (!CFsAreGood) {
-                $.Notify({
-                    caption: 'Error',
-                    content: 'Must input numbers for all Cash Flows or leave blank for 0.',
-                });
-            }
-            if (!PyGood) {
-                $.Notify({
-                    caption: 'Error',
-                    content: 'Must input a number for P or y',
-                });
-            }
-            if (!NMmGood) {
-                $.Notify({
-                    caption: 'Error',
-                    content: 'Input (M and m) or (N) with numbers.',
-                });
-            }
+            if (validateFields())
+                submitPv();
         });
     });
 </script>

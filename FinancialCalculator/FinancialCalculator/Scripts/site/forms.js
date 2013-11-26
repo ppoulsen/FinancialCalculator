@@ -1,4 +1,16 @@
-﻿// For 2 of 3 (P,C,y)
+﻿function parseField(field) {
+    var ret;
+    if (field) {
+        ret = parseFloat(field);
+        if (isNaN(ret))
+            ret = 0;
+    } else
+        ret = 0;
+
+    return ret;
+}
+
+// For 2 of 3 (P,C,y)
 function disableThird() {
     var P = $('#P').val();
     var C = $('#C').val();
