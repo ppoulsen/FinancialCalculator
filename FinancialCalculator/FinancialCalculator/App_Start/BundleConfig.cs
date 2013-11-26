@@ -33,7 +33,7 @@ namespace FinancialCalculator
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
-            bundles.Add(new StyleBundle("~/Content/metro").Include(
+            bundles.Add(new StyleBundle("~/Content/css/metro-ui-css").Include(
                         "~/Content/metro-ui-css/metro-bootstrap.css",
                         "~/Content/metro-ui-css/metro-bootstrap-responsive.css"));
         }
