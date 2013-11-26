@@ -17,25 +17,25 @@ namespace FinancialCalculator.Controllers
         }
 
         [HttpGet]
-        public ActionResult PvWithPAndMm(IEnumerable<double> cashFlows, long P, long M, long m, bool repeat, long repeatCount)
+        public ActionResult PvWithPAndMm(IEnumerable<double> cashFlows, double P, long M, long m, bool repeat, long repeatCount)
         {
             return Redirect("~/PV/"); 
         }
 
         [HttpGet]
-        public ActionResult PvWithPandN(IEnumerable<double> cashFlows, long P, long N, bool repeat, long repeatCount)
+        public ActionResult PvWithPandN(IEnumerable<double> cashFlows, double P, long N, bool repeat, long repeatCount)
         {
             return Redirect("~/PV/"); 
         }
 
         [HttpGet]
-        public ActionResult PvWithyAndMm(IEnumerable<double> cashFlows, long y, long M, long m, bool repeat, long repeatCount)
+        public ActionResult PvWithyAndMm(IEnumerable<double> cashFlows, double y, long M, long m, bool repeat, long repeatCount)
         {
             return Redirect("~/PV/"); 
         }
 
         [HttpGet]
-        public ActionResult PvWithyandN(IEnumerable<double> cashFlows, long y, long N, bool repeat, long repeatCount)
+        public ActionResult PvWithyandN(IEnumerable<double> cashFlows, double y, long N, bool repeat, long repeatCount)
         {
             return Redirect("~/PV/"); 
         }
