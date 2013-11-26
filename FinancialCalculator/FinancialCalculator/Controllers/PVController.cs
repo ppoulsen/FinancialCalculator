@@ -17,7 +17,7 @@ namespace FinancialCalculator.Controllers
         }
 
         [HttpGet]
-        public ActionResult PvWithPAndMm(IEnumerable<double> cashFlows, double P, long M, long m, bool repeat, long repeatCount)
+        public ActionResult PvWithPAndMm(IEnumerable<double> cashFlows, double P, long M, long littleM, bool repeat, long repeatCount)
         {
             return Redirect("~/PV/"); 
         }
@@ -29,7 +29,7 @@ namespace FinancialCalculator.Controllers
         }
 
         [HttpGet]
-        public ActionResult PvWithyAndMm(IEnumerable<double> cashFlows, double y, long M, long m, bool repeat, long repeatCount)
+        public ActionResult PvWithyAndMm(IEnumerable<double> cashFlows, double y, long M, long littleM, bool repeat, long repeatCount)
         {
             return Redirect("~/PV/"); 
         }

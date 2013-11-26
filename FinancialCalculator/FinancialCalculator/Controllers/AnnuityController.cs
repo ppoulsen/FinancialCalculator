@@ -17,7 +17,7 @@ namespace FinancialCalculator.Controllers
         }
 
         [HttpGet]
-        public ActionResult AnnuityWithPandCandMm(double P, double C, long M, long m)
+        public ActionResult AnnuityWithPandCandMm(double P, double C, long M, long littleM)
         {
             return Redirect("~/Annuity/");
         }
@@ -29,7 +29,7 @@ namespace FinancialCalculator.Controllers
         }
 
         [HttpGet]
-        public ActionResult AnnuityWithPandyandMm(double P, double y, long M, long m)
+        public ActionResult AnnuityWithPandyandMm(double P, double y, long M, long littleM)
         {
             return Redirect("~/Annuity/");
         }
@@ -41,7 +41,7 @@ namespace FinancialCalculator.Controllers
         }
 
         [HttpGet]
-        public ActionResult AnnuityWithCandyandMm(double C, double y, long M, long m)
+        public ActionResult AnnuityWithCandyandMm(double C, double y, long M, long littleM)
         {
             return Redirect("~/Annuity/");
         }

@@ -17,7 +17,7 @@ namespace FinancialCalculator.Controllers
         }
         
         [HttpGet]
-        public ActionResult BondWithPandCandMm(double F, double P, double C, long M, long m)
+        public ActionResult BondWithPandCandMm(double F, double P, double C, long M, long littleM)
         {
             return Redirect("~/Bond/");
         }
@@ -29,7 +29,7 @@ namespace FinancialCalculator.Controllers
         }
 
         [HttpGet]
-        public ActionResult BondWithPandyandMm(double F, double P, double y, long M, long m)
+        public ActionResult BondWithPandyandMm(double F, double P, double y, long M, long littleM)
         {
             return Redirect("~/Bond/");
         }
@@ -41,7 +41,7 @@ namespace FinancialCalculator.Controllers
         }
 
         [HttpGet]
-        public ActionResult BondWithCandyandMm(double F, double C, double y, long M, long m)
+        public ActionResult BondWithCandyandMm(double F, double C, double y, long M, long littleM)
         {
             return Redirect("~/Bond/");
         }
