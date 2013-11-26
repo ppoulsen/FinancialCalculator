@@ -11,7 +11,7 @@ namespace FinancialCalculator.Functions
         {
             double fv = cashFlows.ElementAt(1);
             double ratio = fv / P;
-            double rate = Math.Pow(ratio, 1 / M) - 1;
+            double rate = Math.Pow(ratio, (double)1 / (double)M) - 1;
             return rate * littleM;
         }
 
@@ -19,7 +19,7 @@ namespace FinancialCalculator.Functions
         {
             double fv = cashFlows.ElementAt(1);
             double ratio = fv / P;
-            double rate = Math.Pow(ratio, 1 / N) - 1;
+            double rate = Math.Pow(ratio, (double)1 / (double)N) - 1;
             return rate;
         }
 
