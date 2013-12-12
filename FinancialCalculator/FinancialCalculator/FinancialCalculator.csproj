@@ -136,6 +136,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PVController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
+    <Compile Include="Controllers\VentureCapitalController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -266,6 +267,7 @@
     <None Include="Properties\PublishProfiles\PaulsFinanceCalculator - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\PaulsFinanceCalculator - Web Deploy.pubxml" />
     <Content Include="Views\CashFlows\Index.cshtml" />
+    <Content Include="Views\VentureCapital\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
