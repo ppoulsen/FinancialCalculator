@@ -53,6 +53,11 @@
             }
         },
         yAxis: {
+            plotLines: [{
+                color: '#999',
+                width: 1,
+                value: 0
+            }],
             alternateGridColor: null,
             minorTickInterval: null,
             gridLineColor: 'rgba(255, 255, 255, .1)',
@@ -127,6 +132,9 @@
             },
             candlestick: {
                 lineColor: 'white'
+            },
+            columnrange: {
+                pointWidth: 5
             }
         },
 
@@ -296,12 +304,22 @@
         var data = [];
 
         $('.CF').each(function (index, value) {
-            var cf = parseInt($(value).val(), 10);
-            var date = new Date($(value).parent().parent().find('.datepicker-wrapper input').val());
-            if (cf >= 0)
-                data.push([date.getTime(), 0, cf]);
-            else
-                data.push([date.getTime(), cf, 0]);
+            var cfString = $(value).val();
+            var dateString = $(value).parent().parent().find('.datepicker-wrapper input').val();
+            if (cfString && dateString) {
+                var cf = parseInt(cfString, 10);
+                var date = new Date(dateString);
+                if (cf >= 0)
+                    data.push([date.getTime(), 0, cf]);
+                else
+                    data.push([date.getTime(), cf, 0]);
+            }
+        });
+
+        data.sort(function (a, b) {
+            var aDate = a[0];
+            var bDate = b[0];
+            return ((aDate < bDate) ? -1 : ((aDate > bDate) ? 1 : 0));
         });
 
         options.series.push({
