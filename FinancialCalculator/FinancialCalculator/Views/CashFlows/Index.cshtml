@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Cash Flow Diagram";
+}
+
+<script type="text/javascript" src="~/Scripts/highcharts/js/highstock.js"></script>
+<script type="text/javascript" src="~/Scripts/highcharts/js/highcharts-more.js"></script>
+<script type="text/javascript" src="~/Scripts/highcharts/js/modules/exporting.js"></script>
+<script type="text/javascript">
+    var cf_index = 1;
+
+    function validateFields() {
+        CFsAreGood = true;
+        $('.CF').each(function (index) {
+            CFsAreGood = CFsAreGood && ($.isNumeric($(this).val()) || !($(this).val()))
+        });
+        if (!CFsAreGood) {
+            $.Notify({
+                caption: 'Error',
+                content: 'Must input numbers for all Cash Flows or leave blank for 0.',
+            });
+        }
+        return CFsAreGood;
+    }
+
+    $(function () {
+        $('#chart-container').highcharts('StockChart', {
+            chart: {
+                type: 'columnrange'
+            },
+            rangeSelector: {
+                selected: 2
+            },
+            title: {
+                text: 'Cash Flows'
+            },
+        });
+
+        $('#addCf').click(function () {
+            cf_index++;
+            var newId = "CF_" + cf_index;
+            $('.current-cf-row').append(
+                '<div class="input-control text span2">' +
+                '<input id="CF_' + cf_index + '" class="CF" type="text" placeholder="Cash Flow" />' +
+                '<input id="CF_Date_' + cf_index + '" class="CF_Date" type="text" placeholder="Date" />' +
+                '</div>');
+            if (!(cf_index % 6)) {
+                $('.current-cf-row').removeClass('current-cf-row')
+                    .after('<div class="row"></div><div class="row current-cf-row"></div>');
+            }
+
+        });
+    });
+</script>
+
+<div class="row">
+    <div class="span12">
+        <h1>@(ViewBag.Title)</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <div class="row">
+            <div class="span12">
+                <div id="chart-container"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <hr />
+                <h2>Enter Cash Flow and Time Pairs</h2>
+            </div>
+        </div>
+        <div class="row current-cf-row">
+            <div class="input-control text span2">
+                <input id="CF_1" class="CF" type="text" placeholder="Cash Flow" />
+                <input id="CF_Date_1" class="CF_Date" type="text" placeholder="Date" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="span4">
+                <button id="addCf" class="large success">Add CF</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -132,6 +132,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AnnuityController.cs" />
     <Compile Include="Controllers\BondController.cs" />
+    <Compile Include="Controllers\CashFlowsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PVController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
@@ -152,6 +153,43 @@
     <Content Include="Content\fonts\iconFont.json" />
     <Content Include="Content\fonts\iconFont.ttf" />
     <Content Include="Content\fonts\iconFont.woff" />
+    <Content Include="Scripts\highcharts\gfx\vml-radial-gradient.png" />
+    <Content Include="Scripts\highcharts\graphics\skies.jpg" />
+    <Content Include="Scripts\highcharts\graphics\snow.png" />
+    <Content Include="Scripts\highcharts\graphics\sun.png" />
+    <Content Include="Scripts\highcharts\js\adapters\mootools-adapter.js" />
+    <Content Include="Scripts\highcharts\js\adapters\mootools-adapter.src.js" />
+    <Content Include="Scripts\highcharts\js\adapters\prototype-adapter.js" />
+    <Content Include="Scripts\highcharts\js\adapters\prototype-adapter.src.js" />
+    <Content Include="Scripts\highcharts\js\adapters\standalone-framework.js" />
+    <Content Include="Scripts\highcharts\js\adapters\standalone-framework.src.js" />
+    <Content Include="Scripts\highcharts\js\highcharts-more.js" />
+    <Content Include="Scripts\highcharts\js\highcharts-more.src.js" />
+    <Content Include="Scripts\highcharts\js\highstock.js" />
+    <Content Include="Scripts\highcharts\js\highstock.src.js" />
+    <Content Include="Scripts\highcharts\js\modules\annotations.js" />
+    <Content Include="Scripts\highcharts\js\modules\annotations.src.js" />
+    <Content Include="Scripts\highcharts\js\modules\canvas-tools.js" />
+    <Content Include="Scripts\highcharts\js\modules\canvas-tools.src.js" />
+    <Content Include="Scripts\highcharts\js\modules\data.js" />
+    <Content Include="Scripts\highcharts\js\modules\data.src.js" />
+    <Content Include="Scripts\highcharts\js\modules\drilldown.js" />
+    <Content Include="Scripts\highcharts\js\modules\drilldown.src.js" />
+    <Content Include="Scripts\highcharts\js\modules\exporting.js" />
+    <Content Include="Scripts\highcharts\js\modules\exporting.src.js" />
+    <Content Include="Scripts\highcharts\js\modules\funnel.js" />
+    <Content Include="Scripts\highcharts\js\modules\funnel.src.js" />
+    <Content Include="Scripts\highcharts\js\modules\heatmap.js" />
+    <Content Include="Scripts\highcharts\js\modules\heatmap.src.js" />
+    <Content Include="Scripts\highcharts\js\modules\map.js" />
+    <Content Include="Scripts\highcharts\js\modules\map.src.js" />
+    <Content Include="Scripts\highcharts\js\modules\no-data-to-display.js" />
+    <Content Include="Scripts\highcharts\js\modules\no-data-to-display.src.js" />
+    <Content Include="Scripts\highcharts\js\themes\dark-blue.js" />
+    <Content Include="Scripts\highcharts\js\themes\dark-green.js" />
+    <Content Include="Scripts\highcharts\js\themes\gray.js" />
+    <Content Include="Scripts\highcharts\js\themes\grid.js" />
+    <Content Include="Scripts\highcharts\js\themes\skies.js" />
     <Content Include="Scripts\jquery\jquery.easing.1.3.min.js" />
     <Content Include="Scripts\jquery\jquery.min.js" />
     <Content Include="Scripts\jquery\jquery.mousewheel.js" />
@@ -227,6 +265,7 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\PaulsFinanceCalculator - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\PaulsFinanceCalculator - Web Deploy.pubxml" />
+    <Content Include="Views\CashFlows\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
