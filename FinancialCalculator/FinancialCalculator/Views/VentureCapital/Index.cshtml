@@ -7,6 +7,7 @@
     var round_index = 1;
 
     function validateFields() {
+        var StartSharesGood = $.isNumeric($('#starting-shares').val());
         var YearExitGood = $.isNumeric($('#years-to-exit').val());
         var PeRatioGood = $.isNumeric($('#pe-ratio').val());
         var ExitEarningsGood = $.isNumeric($('#earnings-at-exit').val());
@@ -22,6 +23,12 @@
         $('.required-roi').each(function (index) {
             RoiAreGood = RoiAreGood && ($.isNumeric($(this).val()));
         });
+        if (!StartSharesGood) {
+            $.Notify({
+                caption: 'Error',
+                content: 'Must input number for starting shares.',
+            });
+        }
         if (!YearExitGood) {
             $.Notify({
                 caption: 'Error',
@@ -62,67 +69,35 @@
     }
 
     function submitVc() {
-        /*
-        var cashFlows = new Array();
-        var P, y;
-        var m, M, N;
-        var repeat, repeatCount;
+        var roundYears = new Array();
+        var roundFunds = new Array();
+        var roundRois = new Array();
+        var startingShares, yearsToExit, peRatio, earningsAtExit;
 
         // Grab our cash flows
-        $('.CF').each(function () {
-            var id = $(this).attr('id');
-            // CF_###
-            var num = parseInt(id.split('_')[1]);
-            cashFlows[num] = parseField($(this).val());
+        $('.round-row').each(function () {
+            roundYears.push($(this).find('div .years-from-start').val());
+            roundFunds.push($(this).find('div .invested-funds').val());
+            roundRois.push($(this).find('div .required-roi').val());
         });
 
-        // P or y?
-        var useP = true;
-        if ($('#P').attr('disabled'))
-            useP = false;
-
-        // Mm or N?
-        var useMm = true;
-        if ($('#M').attr('disabled'))
-            useMm = false;
-
-        // Get P or y
-        if (useP)
-            P = parseField($('#P').val());
-        else
-            y = parseField($('#y').val());
-
-        if (useMm) {
-            M = parseField($('#M').val());
-            m = parseField($('#m').val());
-        } else
-            N = parseField($('#N').val());
-
-        repeat = $('#repeat').is(':checked');
-        if (repeat)
-            repeatCount = parseField($('#repeatCount').val());
-        else
-            repeatCount = 0;
-        
-        var func = getFunctionName(useP, useMm, repeat, repeatCount);
+        startingShares = $('#starting-shares').val();
+        yearsToExit = $('#years-to-exit').val();
+        peRatio = $('#pe-ratio').val();
+        earningsAtExit = $('#earnings-at-exit').val();
 
         var params = new Object();
-        params.cashFlows = cashFlows;
-        if (useP)
-            params.P = P;
-        else
-            params.y = y;
-        if (useMm) {
-            params.M = M;
-            params.littleM = m;
-        } else
-            params.N = N;
-        params.repeat = repeat;
-        params.repeatCount = repeatCount;
+        params.roundYears = roundYears;
+        params.roundFunds = roundFunds;
+        params.roundRois = roundRois;
+        params.startingShares = startingShares;
+        params.yearsToExit = yearsToExit;
+        params.peRatio = peRatio;
+        params.earningsAtExit = earningsAtExit;
+
         var serialized = $.param(params, true);
-        var url = func + '?' + serialized;
+        var url = '/VentureCapital/Calculate?' + serialized;
         window.location.href = url;
-        */
     }
 
     $(function () {
@@ -162,15 +137,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="input-control text span4">
+            <div class="input-control text span3">
+                <label>Starting Shares</label>
+                <input id="starting-shares" type="text" />
+            </div>
+            <div class="input-control text span3">
                 <label>Years to Exit</label>
                 <input id="years-to-exit" type="text" />
             </div>
-            <div class="input-control text span4">
+            <div class="input-control text span3">
                 <label>P/E Ratio</label>
                 <input id="pe-ratio" type="text" />
             </div>
-            <div class="input-control text span4">
+            <div class="input-control text span3">
                 <label>Earnings at Exit</label>
                 <input id="earnings-at-exit" type="text" />
             </div>
