@@ -129,6 +129,9 @@
     }
 
     $(function () {
+        disableOther();
+        disableNOrMAndm();
+
         $('#P,#y').on('input', disableOther);
         $('#M,#m,#N').on('input', disableNOrMAndm);
         $('#repeat').change(function () {

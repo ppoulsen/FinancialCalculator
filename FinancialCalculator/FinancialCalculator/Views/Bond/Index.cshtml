@@ -102,6 +102,9 @@
     }
 
     $(function () {
+        disableThird();
+        disableNOrMAndm();
+
         $('#P,#C,#y').on('input', disableThird);
         $('#M,#m,#N').on('input', disableNOrMAndm);
         $('#submit-bond').click(function () {
