@@ -59,11 +59,28 @@
         var repeat, repeatCount;
 
         // Grab our cash flows
+        var i = 0;
         $('.CF').each(function () {
             var id = $(this).attr('id');
             // CF_###
             var num = parseInt(id.split('_')[1]);
-            cashFlows[num] = parseField($(this).val());
+            if (num != 0) {
+                var repeatString = $(this).parent().parent().find('.CF_Repeat').val();
+                var repeatField = 1;
+                if ($.isNumeric(repeatString))
+                    repeatField = parseInt(repeatString);
+                if (repeatField < 1)
+                    repeatField = 1;
+
+                var j;
+                for (j = 0; j < repeatField; j++) {
+                    cashFlows[i] = parseField($(this).val());
+                    i++;
+                }
+            } else {
+                i++;
+                cashFlows[i-1] = parseField($(this).val());
+            }
         });
 
         // P or y?
@@ -88,12 +105,9 @@
         } else
             N = parseField($('#N').val());
 
-        repeat = $('#repeat').is(':checked');
-        if (repeat)
-            repeatCount = parseField($('#repeatCount').val());
-        else
-            repeatCount = 0;
-        
+        repeat = false
+        repeatCount = 0;
+
         var func = getFunctionName(useP, useMm, repeat, repeatCount);
 
         var params = new Object();
@@ -129,8 +143,14 @@
             cf_index++;
             var newId = "CF_" + cf_index;
             $('.current-cf-row').append(
-                '<div class="input-control text span2"><input id="CF_'
-                + cf_index + '" class="CF" type="text" /></div>');
+                '<div class="span2">' +
+                '<div class="input-control text">' +
+                '<input id="CF_' + cf_index + '" class="CF" type="text" placeholder="Cash Flow" />' +
+                '</div>' +
+                '<div class="input-control text">' +
+                '<input id="CF_Repeat_' + cf_index + '" class="CF_Repeat" type="text" placeholder="Repeat" />' +
+                '</div>' +
+                '</div>');
             if (!(cf_index % 6)) {
                 $('.current-cf-row').removeClass('current-cf-row')
                     .after('<div class="row current-cf-row"></div>');
@@ -169,24 +189,18 @@
             </div>
         </div>
         <div class="row current-cf-row">
-            <div class="input-control text span2">
-                <input id="CF_1" class="CF" type="text" />
+            <div class="span2">
+                <div class="input-control text">
+                    <input id="CF_1" class="CF" type="text" placeholder="Cash Flow" />
+                </div>
+                <div class="input-control text">
+                    <input id="CF_Repeat_1" class="CF_Repeat" type="text" placeholder="Repeat" />
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="span4">
                 <button id="addCf" class="large success">Add CF</button>
-            </div>
-            <div class="input-control checkbox span4">
-                <label>
-                    <input id="repeat" type="checkbox" />
-                    <span class="check"></span>
-                    Repeat Last CF?
-                </label>
-            </div>
-            <div class="input-control text span4">
-                <label>Repeat for how long?</label>
-                <input id="repeatCount" type="text" disabled="disabled" />
             </div>
         </div>
         <div class="row">
